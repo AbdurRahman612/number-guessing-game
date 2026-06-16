@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int generateNumber()
+{
+    return rand() % 100 + 1;
+}
+
+
+void checkGuess(int guess, int number)
+{
+    if (guess > number)
+        printf("Too High! Try again.\n");
+    else if (guess < number)
+        printf("Too Low! Try again.\n");
+    else
+        printf("Congratulations! You guessed the correct number: %d\n", number); 
+}
+
+void displayGuesses(int guesses[], int count)
+{
+    printf("\nYour guesses were: ");
+    for (int i = 0; i < count; i++)
+    {
+        printf("%d ", guesses[i]);
+    }
+    printf("\n");
+}
+
+int main()
+{
+    int number, guess;
+    int guesses[100];  
+    int count = 0;
+
+    srand(time(0));
+
+    number = generateNumber();
+
+    printf("=== Number Guessing Game ===\n");
+    printf("Guess a number between 1 and 100\n");
+
+    do
+    {
+        printf("Enter your guess: ");
+        scanf("%d", &guess);
+
+        guesses[count] = guess;
+        count++;
+
+        checkGuess(guess, number);
+
+    } while (guess != number);
+
+    displayGuesses(guesses, count);
+
+    return 0;
+}
